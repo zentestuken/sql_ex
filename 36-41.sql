@@ -38,13 +38,7 @@ GROUP BY oc.ship
 --40
 SELECT maker, MIN(type) FROM product
 GROUP BY maker
-HAVING COUNT(model) > 1
-AND maker IN
-(SELECT maker FROM 
-(SELECT maker, type FROM product
-GROUP BY maker, type) t1
-GROUP BY maker
-HAVING COUNT(maker) = 1)
+HAVING COUNT(DISTINCT type) = 1 AND COUNT(model) > 1
 
 --41
 SELECT pr.maker, 
