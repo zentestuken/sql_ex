@@ -42,10 +42,7 @@ select cl.class from classes cl
 join ships sh on sh.class = cl.class
 join outcomes ou on ou.ship = sh.name and result = 'sunk'
 union
-(select cl.class from classes cl
-join outcomes ou on cl.class = ou.ship and result = 'sunk'
-except 
 select cl.class from classes cl
 join outcomes ou on cl.class = ou.ship and result = 'sunk'
-where ou.ship in (select name from ships)
-)
+where ou.ship not in 
+(select name from ships)
